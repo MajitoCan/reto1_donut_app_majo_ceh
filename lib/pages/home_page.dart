@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../tab/burger_tab.dart';
+import '../tab/donut_tab.dart';
+import '../tab/pancake_tab.dart';
+import '../tab/pizza_tab.dart';
+import '../tab/smoothie_tab.dart';
+import '../utils/my_tab.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -8,9 +15,25 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<Widget>myTabs=[
+    //donut
+    const MyTab(iconPath: 'lib/icons/donut.png'),
+
+    const MyTab(iconPath: 'lib/icons/burger.png'),
+
+    const MyTab(iconPath: 'lib/icons/smoothie.png'),
+
+    const MyTab(iconPath: 'lib/icons/pancakes.png'),
+
+    const MyTab(iconPath: 'lib/icons/pizza.png'),
+
+  ];
   @override
+
   Widget build(BuildContext context) {
-    return Scaffold(
+    return DefaultTabController(
+      length: myTabs.length,
+      child: Scaffold(
       appBar: AppBar(
           backgroundColor: Colors.transparent,
           leading: Padding(
@@ -32,13 +55,13 @@ class _HomePageState extends State<HomePage> {
               ),
             )
           ]),
-      body: const Column(children: [
+      body: Column(children: [
         //Texto a want to eat
-        Padding(
+        const Padding(
           padding: EdgeInsets.all(24.0),
           child: Row(
             children: [
-              Text('I want to', style: TextStyle(fontSize: 32)),
+              Text('I want to ', style: TextStyle(fontSize: 32)),
               Text('Eat',
                   style: TextStyle(
                       fontSize: 32,
@@ -47,8 +70,24 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
+        //TabBar
+        TabBar(tabs: myTabs),
         //tab bar view
+        const Expanded(child: TabBarView(children: [
+          //Donut
+          DonutTab(),
+          //Burger
+          BurgerTab(),
+          //Smoothie
+          SmoothieTab(),
+          //Pancake
+          PancakeTab(),
+          //Pizza
+          PizzaTab(),
+        ],))
+        //Carrito
       ]),
+      ),
     );
   }
 }
