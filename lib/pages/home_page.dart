@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../tab/burger_tab.dart';
-import '../tab/donut_tab.dart';
-import '../tab/pancake_tab.dart';
-import '../tab/pizza_tab.dart';
-import '../tab/smoothie_tab.dart';
-import '../utils/my_tab.dart';
+import '../tab/Burger_tab.dart';
+import '../tab/Donut_tab.dart';
+import '../tab/Pancake_tab.dart';
+import '../tab/Pizza_tab.dart';
+import '../tab/Smoothie_tab.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,79 +14,169 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Widget> myTabs = [
-    //donut
-    const MyTab(iconPath: 'lib/icons/donut.png'),
+  List<Tab> myTabs = [
+    // Donut tab
+    Tab(
+      icon: const ImageIcon(AssetImage('lib/icons/donut.png')),
+      text: 'Donuts', // Nombre del tab
+    ),
 
-    const MyTab(iconPath: 'lib/icons/burger.png'),
+    // Burger tab
+    Tab(
+      icon: const ImageIcon(AssetImage('lib/icons/burger.png')),
+      text: 'Burgers', // Nombre del tab
+    ),
 
-    const MyTab(iconPath: 'lib/icons/smoothie.png'),
+    // Smoothie tab
+    Tab(
+      icon: const ImageIcon(AssetImage('lib/icons/smoothie.png')),
+      text: 'Smoothies', // Nombre del tab
+    ),
 
-    const MyTab(iconPath: 'lib/icons/pancakes.png'),
+    // Pancake tab
+    Tab(
+      icon: const ImageIcon(AssetImage('lib/icons/pancakes.png')),
+      text: 'Pancakes', // Nombre del tab
+    ),
 
-    const MyTab(iconPath: 'lib/icons/pizza.png'),
+    // Pizza tab
+    Tab(
+      icon: const ImageIcon(AssetImage('lib/icons/pizza.png')),
+      text: 'Pizzas', // Nombre del tab
+    ),
   ];
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: myTabs.length,
       child: Scaffold(
         appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            leading: Padding(
-              padding: const EdgeInsets.only(left: 24.0),
-              child: IconButton(
-                icon: Icon(Icons.menu, color: Colors.grey[800], size: 36),
-                onPressed: () {
-                  print("object");
-                },
+          backgroundColor: Colors.transparent,
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 16.0),
+            child: IconButton(
+              icon: Icon(
+                Icons.menu,
+                color: Colors.grey[800],
+                size: 36,
               ),
+              onPressed: () {
+                print('boton menu');
+              },
             ),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(left: 24.0),
-                child: Icon(
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 16.0),
+              child: IconButton(
+                icon: Icon(
                   Icons.person,
                   color: Colors.grey[800],
                   size: 36,
                 ),
-              )
-            ]),
-        body: Column(children: [
-          //Texto a want to eat
-          const Padding(
-            padding: EdgeInsets.all(24.0),
-            child: Row(
-              children: [
-                Text('I want to ', style: TextStyle(fontSize: 32)),
-                Text('Eat',
+                onPressed: () {
+                  print('otra cosa');
+                },
+              ),
+            ),
+          ],
+        ),
+        body: Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Row(
+                children: [
+                  Text(
+                    'I want to ',
+                    style: TextStyle(fontSize: 32),
+                  ),
+                  Text(
+                    'Eat ',
                     style: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
-                        decoration: TextDecoration.underline)),
-              ],
+                        decoration: TextDecoration.underline),
+                  ),
+                ],
+              ),
             ),
-          ),
-          //TabBar
-          TabBar(tabs: myTabs),
-          //tab bar view
-          Expanded(
+            // Tab bar
+            TabBar(tabs: myTabs),
+
+            // Tab bar view
+            Expanded(
               child: TabBarView(
-            children: [
-              //Donut
-              DonutTab(),
-              //Burger
-              BurgerTab(),
-              //Smoothie
-              SmoothieTab(),
-              //Pancake
-              PancakeTab(),
-              //Pizza
-              PizzaTab(),
-            ],
-          ))
-          //Carrito
-        ]),
+                children: [
+                  // Donut tab
+                  DonutTab(),
+
+                  // Burger tab
+                  BurgerTab(),
+
+                  // Smoothie tab
+                  SmoothieTab(),
+
+                  // Pancake tab
+                  PancakeTab(),
+
+                  // Pizza tab
+                  PizzaTab(),
+                ],
+              ),
+            ),
+
+            // New Section: Items Summary and View Cart Button
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // Text for items and price
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '2 Items | \$45',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          Text(
+                            'Delivery Charges Included',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                      // View Cart button
+                      ElevatedButton(
+                        onPressed: () {
+                          // Lógica para ver el carrito
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.pink[400], // Color rosa
+                        ),
+                        child: Text(
+                          'View Cart',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

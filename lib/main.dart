@@ -12,7 +12,12 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: const HomePage(),
-      theme: ThemeData(tabBarTheme: const TabBarTheme(indicatorColor: Colors.purple)), //poner de color morado la barrita de abajo
+      debugShowCheckedModeBanner: false, // Quitar el banner de "Debug"
+      theme: ThemeData(
+        tabBarTheme: const TabBarTheme(
+          indicatorColor: Colors.pink,
+        ),
+      ),
     );
   }
 }
